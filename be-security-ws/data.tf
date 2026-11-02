@@ -22,14 +22,14 @@ data "terraform_remote_state" "frontend_network" {
   }
 }
 
-# data "terraform_remote_state" "frontend_security" {
-#   backend = "remote"
+data "terraform_remote_state" "frontend_security" {
+  backend = "remote"
 
-#   config = {
-#     organization = "hay-tfc"
+  config = {
+    organization = "hay-tfc"
 
-#     workspaces = {
-#       name = "fe-security-ws"
-#     }
-#   }
-# }
+    workspaces = {
+      name = "fe-security-ws"
+    }
+  }
+}
