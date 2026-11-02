@@ -3,6 +3,15 @@ variable "region" {
   default     = "ap-southeast-1"
 }
 
+#############################################################
+# Frontend VPC Variables
+#############################################################
+
+variable "frontend_vpc_address_space" {
+  description = "The CIDR block for the frontend VPC."
+  default     = "10.6.0.0/16"
+}
+
 variable "frontend_prefix" {
   description = "The prefix for the frontend resources."
   default     = "frontend"
@@ -13,17 +22,66 @@ variable "frontend_environment" {
   default     = "dev"
 }
 
+variable "frontend_public_subnet_cidr" {
+  description = "The CIDR block for the frontend public subnets."
+  default     = ["10.6.1.0/24", "10.6.2.0/24", "10.6.3.0/24"]
+}
+
+variable "frontend_private_subnet_cidr" {
+  description = "The CIDR block for the frontend private subnets."
+  default     = ["10.6.253.0/24", "10.6.254.0/24", "10.6.255.0/24"]
+}
+
 variable "fe_instance_type" {
   description = "Specifies the AWS instance type."
-  default     = "t3.micro"
+  default     = "t2.micro"
 }
 
 #############################################################
-# App Variables
+# Backend VPC Variables
 #############################################################
+
+variable "backend_vpc_address_space" {
+  description = "The CIDR block for the backend VPC."
+  default     = "192.168.0.0/16"
+}
+
+variable "backend_prefix" {
+  description = "The prefix for the backend resources."
+  default     = "backend"
+}
+
+variable "backend_environment" {
+  description = "The environment for the backend resources."
+  default     = "dev"
+}
+
+variable "backend_public_subnet_cidr" {
+  description = "The CIDR block for the backend public subnets."
+  default     = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24"]
+}
+
+variable "backend_private_subnet_cidr" {
+  description = "The CIDR block for the backend private subnets."
+  default     = ["192.168.253.0/24", "192.168.254.0/24", "192.168.255.0/24"]
+}
+
+variable "be_instance_type" {
+  description = "Specifies the AWS instance type."
+  default     = "t2.micro"
+}
+
+# #############################################################
+# # App Variables
+# #############################################################
 
 variable "fe_placeholder" {
   default     = "placedog.net"
+  description = "Image-as-a-service URL. Some other fun ones to try are fillmurray.com, placecage.com, placebeard.it, loremflickr.com, baconmockup.com, placeimg.com, placebear.com, placeskull.com, stevensegallery.com, placedog.net"
+}
+
+variable "be_placeholder" {
+  default     = "placebear.com"
   description = "Image-as-a-service URL. Some other fun ones to try are fillmurray.com, placecage.com, placebeard.it, loremflickr.com, baconmockup.com, placeimg.com, placebear.com, placeskull.com, stevensegallery.com, placedog.net"
 }
 
@@ -40,23 +98,4 @@ variable "width" {
 variable "height" {
   default     = "400"
   description = "Image height in pixels."
-}
-
-##############################################################
-variable "fe_network_workspace_name" {
-  description = "Name of the frontend network workspace to query."
-  type        = string
-  default     = "fe-network-ws"
-}
-
-variable "fe_security_workspace_name" {
-  description = "Name of the frontend security workspace to query."
-  type        = string
-  default     = "fe-security-ws"
-}
-
-variable "organization_name" {
-  description = "Name of the HCP Terraform organization with the source workspace"
-  type        = string
-  default     = "nandahc-vcs-driven-team"
 }
